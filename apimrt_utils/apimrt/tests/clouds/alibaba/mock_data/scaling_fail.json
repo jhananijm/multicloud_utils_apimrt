@@ -1,0 +1,15 @@
+{
+    "ScalingGroups1": {
+        "ScalingGroups": {
+            "ScalingGroup": [
+                1,
+                2
+            ]
+        }
+    },
+    "ScalingGroups2": {
+        "ScalingGroups": {
+            "ScalingGroup": []
+        }
+    }
+}

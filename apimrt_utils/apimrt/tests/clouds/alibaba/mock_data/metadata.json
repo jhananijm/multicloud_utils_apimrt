@@ -1,0 +1,18 @@
+{
+    "zone-id": "cn-shanghai-f",
+    "serial-number": "3f1a38f8-544b-41aa-b6fd-4635d80994cf",
+    "instance-id": "i-uf6f3co6z8a4u3imirfc",
+    "region-id": "cn-shanghai",
+    "private-ipv4": "192.168.12.133",
+    "owner-account-id": "1039341488077585",
+    "mac": "00:16:3e:27:3e:f2",
+    "image-id": "m-uf67ljgxdf01mpgmnceh",
+    "instance-type": "ecs.c6.2xlarge",
+    "AccessKeyId": "xxxxx",
+    "AccessKeySecret": "xxxxx",
+    "Expiration": "2023-03-31T15:12:34Z",
+    "SecurityToken": "xxxxx",
+    "LastUpdated": "2023-03-31T09:12:34Z",
+    "Code": "Success",
+    "SecretData": "{\"Test1\": \"Test2\"}"
+}

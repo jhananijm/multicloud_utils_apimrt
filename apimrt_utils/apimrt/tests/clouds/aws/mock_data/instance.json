@@ -1,0 +1,66 @@
+{
+    "ResponseMetadata": 
+    {
+        "HTTPStatusCode": 200
+    },
+    "Reservations": [
+        {
+            "Instances": [
+                {
+                    "ImageId": "ami-0a516555118d39c8b", 
+                    "InstanceId": "i-0925440737cc9da2d", 
+                    "InstanceType": "c5.2xlarge", 
+                    "PrivateIpAddress": "192.168.12.104", 
+                    "State": 
+                    {
+                        "Code": 16, 
+                        "Name": "running"
+                    }, 
+                    "SubnetId": "subnet-0e4155078114d29ba", 
+                    "VpcId": "vpc-084d9a92e0358520b", 
+                    "BlockDeviceMappings": [
+                        {
+                            "DeviceName": "/dev/sda1", 
+                            "Ebs": 
+                            {
+                                "Status": "attached", 
+                                "VolumeId": "vol-07fc73a7e081c97cf"
+                            }
+                        }, 
+                        {
+                            "DeviceName": "/dev/sdf", 
+                            "Ebs": {
+                                "Status": "attached", 
+                                "VolumeId": "vol-00e57519356f70f33"
+                            }
+                        }
+                    ], 
+                    "RootDeviceName": "/dev/sda1", 
+                    "RootDeviceType": "ebs", 
+                    "SecurityGroups": [
+                        {
+                            "GroupName": "dt-dev-landscape-sg-ec2", 
+                            "GroupId": "sg-0d4d3971a7711b0df"
+                        }
+                    ], 
+                    "Tags": [
+                        {
+                            "Key": "Name", 
+                            "Value": "dt-dev-landscape_ZKCS1"
+                        }, 
+                        {
+                            "Key": "Project", 
+                            "Value": "dt-dev-landscape"
+                        }, 
+                        {
+                            "Key": "SubType", 
+                            "Value": "zookeeper,cassandra"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+       
+        

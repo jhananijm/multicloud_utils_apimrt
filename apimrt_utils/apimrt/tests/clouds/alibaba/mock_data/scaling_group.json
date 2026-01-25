@@ -1,0 +1,27 @@
+[
+    {
+      "ScalingConfigurations": 
+      {
+        "ScalingConfiguration": [
+          {
+            "ScalingConfigurationId": "config_id_1", 
+            "ScalingConfigurationName": "config_name_1"
+          }
+        ]
+      }
+    },
+    {
+      "ScalingConfigurations": 
+      {
+        "ScalingConfiguration": [
+          {
+            "ScalingConfigurationId": "config_id_2", 
+            "ScalingConfigurationName": "config_name_2"
+          }
+        ]
+      }
+    }
+]
+  
+  
+  

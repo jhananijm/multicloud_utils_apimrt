@@ -1,0 +1,15 @@
+{
+    "Policies": 
+    {
+        "Policy": [
+            {
+                "PolicyType": "Custom", 
+                "Description": "this is a policy test", 
+                "AttachDate": "2023-04-03T07:51:19Z", 
+                "DefaultVersion": "v6", 
+                "PolicyName": "alicloud-test-ess-policy"
+            }
+            ]
+    }, 
+    "RequestId": "04B5DB00-8F4E-50FB-9A62-9A720E0162B6"
+}

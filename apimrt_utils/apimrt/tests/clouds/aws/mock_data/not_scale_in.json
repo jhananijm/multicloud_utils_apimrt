@@ -1,0 +1,9 @@
+{
+    "ResponseMetadata": {"HTTPStatusCode": 200},
+    "Activities": [
+        {
+            "Description": "Terminating instance i-1234567890abcdef",
+            "Cause": "The instance was terminated or stopped."
+        }
+    ]
+}

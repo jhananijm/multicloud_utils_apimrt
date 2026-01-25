@@ -1,0 +1,10 @@
+{
+    "Snapshots": [
+        {
+            "SnapshotId": "snapshot1"
+        }, 
+        {
+            "SnapshotId": "snapshot2"
+        }
+    ]
+}

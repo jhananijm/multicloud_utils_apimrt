@@ -1,0 +1,13 @@
+{
+    "my-role": [
+        {
+            "PolicyArn": "arn:aws:iam::123456789012:policy/Policy1"
+        },
+        {
+            "PolicyArn": "arn:aws:iam::123456789012:policy/Policy2"
+        },
+        {
+            "PolicyArn": "arn:aws:iam::123456789012:policy/Policy3"
+        }
+    ]
+}

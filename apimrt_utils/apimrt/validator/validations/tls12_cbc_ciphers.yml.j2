@@ -1,0 +1,35 @@
+name: Validate TLS 1.2 ciphers
+
+server_groups:
+    router:
+        - host: "{{ router_ip }}"
+          user: "{{ system_user }}"
+          private_key: "{{ private_key }}"
+          port: 22
+
+tasks:
+    - name: validate_cbc_ciphers
+      description: Validate that weak CBC ciphers are disabled and strong ciphers are enabled
+      validations:
+          - remoteshell:
+                command: nmap --script ssl-enum-ciphers -p 443 127.0.0.1
+                contains:
+                    strings:
+                        - DHE-RSA-AES128-GCM-SHA256
+                        - ECDHE-RSA-AES128-GCM-SHA256
+                        - DHE-RSA-AES256-GCM-SHA384
+                        - ECDHE-RSA-AES256-GCM-SHA384
+                not_contains:
+                    strings:
+                        - ECDHE-ECDSA-AES128-GCM-SHA256
+                        - ECDHE-ECDSA-AES256-GCM-SHA384
+                        - ECDHE-ECDSA-AES128-SHA256
+                        - ECDHE-ECDSA-AES256-SHA384
+                        - ECDHE-RSA-AES128-GCM-SHA256
+                        - ECDHE-RSA-AES256-GCM-SHA384
+                        - ECDHE-RSA-AES128-SHA256
+                        - ECDHE-RSA-AES256-SHA384
+                        - DHE-RSA-AES128-GCM-SHA256
+                    condition: any
+                groups:
+                    - router

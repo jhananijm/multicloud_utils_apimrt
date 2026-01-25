@@ -1,0 +1,11 @@
+[report]
+show_missing = True
+exclude_lines =
+     pylint: disable
+     if __name__ == .__main__.:
+     except
+     raise
+     pass
+
+[run]
+omit = */apigee/*, */silent_config/*, */validator/*, */__init__.py, */tests/*, */htmlcov/*, */cc3/*, */common_cloud/*, */tests/clouds/common_utils.py, */main.py, */notifier/*, */cloud_meta/*

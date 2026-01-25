@@ -1,0 +1,94 @@
+---
+compaction_strategy:
+  kms: LeveledCompactionStrategy
+  user_settings: LeveledCompactionStrategy
+  keyvaluemap: LeveledCompactionStrategy
+  devconnect: LeveledCompactionStrategy
+  counter: LeveledCompactionStrategy
+  cache: LeveledCompactionStrategy
+  ax_custom_report_model: LeveledCompactionStrategy
+  auth: LeveledCompactionStrategy
+  audit: LeveledCompactionStrategy
+  apprepo: LeveledCompactionStrategy
+  apimodel: LeveledCompactionStrategy
+  identityzone: LeveledCompactionStrategy
+  dek: LeveledCompactionStrategy
+  analytics: LeveledCompactionStrategy
+
+
+column_family_compaction_strategy:
+  kms:
+    organizations: LeveledCompactionStrategy
+    maps: LeveledCompactionStrategy
+    apps: LeveledCompactionStrategy
+    app_credentials: LeveledCompactionStrategy
+    api_products: LeveledCompactionStrategy
+    apiproducts_appslist: LeveledCompactionStrategy
+    api_resources: LeveledCompactionStrategy
+    app_end_user: LeveledCompactionStrategy
+    oauth_20_authorization_codes: LeveledCompactionStrategy
+    oauth_20_access_tokens: LeveledCompactionStrategy
+    oauth_10_request_tokens: LeveledCompactionStrategy
+    oauth_10_access_tokens: LeveledCompactionStrategy
+    oauth_10_verifiers: LeveledCompactionStrategy
+    app_enduser_tokens: LeveledCompactionStrategy
+  user_settings:
+    user_settings: LeveledCompactionStrategy
+  keyvaluemap:
+    keyvaluemaps_r21: LeveledCompactionStrategy
+  devconnect:
+    developers: LeveledCompactionStrategy
+    companies: LeveledCompactionStrategy
+    company_developers: LeveledCompactionStrategy
+  counter:
+    counters_current_version: LeveledCompactionStrategy
+    counters_with_expiry: LeveledCompactionStrategy
+    counters: LeveledCompactionStrategy
+    key_timestamp_count: LeveledCompactionStrategy
+    timestamp_key: LeveledCompactionStrategy
+    period_timestamp: LeveledCompactionStrategy
+    gateway_quota: LeveledCompactionStrategy
+  cache:
+    cache_entries: LeveledCompactionStrategy
+    cache_sequence_id_r24: LeveledCompactionStrategy
+  ax_custom_report_model:
+    report_description: LeveledCompactionStrategy
+    report_id_lookup: LeveledCompactionStrategy
+    org_metadata: LeveledCompactionStrategy
+    org_report_lookup: LeveledCompactionStrategy
+    report_created_view: LeveledCompactionStrategy
+    report_viewed_view: LeveledCompactionStrategy
+  auth:
+    totp: LeveledCompactionStrategy
+  audit:
+    audits: LeveledCompactionStrategy
+    audits_ref: LeveledCompactionStrategy
+  apprepo:
+    organizations: LeveledCompactionStrategy
+    environments: LeveledCompactionStrategy
+    apiproxies: LeveledCompactionStrategy
+    apiproxy_revisions: LeveledCompactionStrategy
+    api_proxy_revisions_r21: LeveledCompactionStrategy
+  apimodel:
+    apis: LeveledCompactionStrategy
+    apis_revision: LeveledCompactionStrategy
+    resource: LeveledCompactionStrategy
+    method: LeveledCompactionStrategy
+    revision_counters: LeveledCompactionStrategy
+    template_counters: LeveledCompactionStrategy
+    template: LeveledCompactionStrategy
+    credentials: LeveledCompactionStrategy
+    credentialsv2: LeveledCompactionStrategy
+    schemas: LeveledCompactionStrategy
+    security: LeveledCompactionStrategy
+    template_auth: LeveledCompactionStrategy
+  identityzone:
+    identityzones: LeveledCompactionStrategy
+    orgtoidentityzone: LeveledCompactionStrategy
+  dek:
+    keys: LeveledCompactionStrategy
+  analytics:
+    custom_aggregates_defn: LeveledCompactionStrategy
+    custom_rules_defn: LeveledCompactionStrategy
+    custom_aggregates_defn_updates: LeveledCompactionStrategy
+    custom_rules_defn_updates: LeveledCompactionStrategy

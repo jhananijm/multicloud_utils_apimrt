@@ -1,0 +1,150 @@
+{
+    "Instances": {
+        "Instance": [
+            {
+                "ResourceGroupId": "",
+                "Memory": 16384,
+                "InstanceChargeType": "PostPaid",
+                "Cpu": 8,
+                "OSName": "RedHat_64",
+                "InstanceNetworkType": "vpc",
+                "InnerIpAddress": {
+                    "IpAddress": []
+                },
+                "ExpiredTime": "2099-12-31T15: 59Z",
+                "ImageId": "m-uf67ljgxdf01mpgmnceh",
+                "EipAddress": {
+                    "AllocationId": "",
+                    "IpAddress": "",
+                    "InternetChargeType": ""
+                },
+                "ImageOptions": {},
+                "HostName": "iZuf69ub1qaf2lawpt6q53Z",
+                "Tags": {
+                    "Tag": [
+                        {
+                            "TagKey": "Project",
+                            "TagValue": "cpabs-10516"
+                        },
+                        {
+                            "TagKey": "Type",
+                            "TagValue": "runtime"
+                        },
+                        {
+                            "TagKey": "serverType",
+                            "TagValue": "cpabs-10516_router"
+                        },
+                        {
+                            "TagKey": "Subtype",
+                            "TagValue": "router"
+                        },
+                        {
+                            "TagKey": "acs:autoscaling:scalingGroupId",
+                            "TagValue": "asg-uf6dw6usysdaaqci93uf"
+                        }
+                    ]
+                },
+                "VlanId": "",
+                "Status": "Running",
+                "HibernationOptions": {
+                    "Configured": "False"
+                },
+                "MetadataOptions": {
+                    "HttpTokens": "",
+                    "HttpEndpoint": ""
+                },
+                "InstanceId": "i-uf69ub1qaf2lawpt6q53",
+                "StoppedMode": "Not-applicable",
+                "CpuOptions": {
+                    "ThreadsPerCore": 2,
+                    "Numa": "",
+                    "CoreCount": 4
+                },
+                "StartTime": "2023-03-16T08: 52Z",
+                "DeletionProtection": "False",
+                "SecurityGroupIds": {
+                    "SecurityGroupId": [
+                        "sg-uf653hdmobpqillyb16v"
+                    ]
+                },
+                "VpcAttributes": {
+                    "PrivateIpAddress": {
+                        "IpAddress": [
+                            "192.168.12.139"
+                        ]
+                    },
+                    "VpcId": "vpc-uf6hkavcc9d1mhpl1tcgs",
+                    "VSwitchId": "vsw-uf6o1gwf2jn9um7bt4a6g",
+                    "NatIpAddress": ""
+                },
+                "InternetChargeType": "PayByTraffic",
+                "InstanceName": "cpabs-10516-custom-router",
+                "DeploymentSetId": "",
+                "InternetMaxBandwidthOut": 0,
+                "SerialNumber": "b54aa9c2-7d8d-4c62-8e84-a13d41f7e25a",
+                "OSType": "linux",
+                "CreationTime": "2023-03-16T08: 52Z",
+                "AutoReleaseTime": "",
+                "Description": "ESS",
+                "InstanceTypeFamily": "ecs.c6",
+                "DedicatedInstanceAttribute": {
+                    "Tenancy": "",
+                    "Affinity": ""
+                },
+                "PublicIpAddress": {
+                    "IpAddress": []
+                },
+                "GPUSpec": "",
+                "NetworkInterfaces": {
+                    "NetworkInterface": [
+                        {
+                            "Type": "Primary",
+                            "PrimaryIpAddress": "192.168.12.139",
+                            "MacAddress": "00: 16:3e: 20: 0f: 58",
+                            "NetworkInterfaceId": "eni-uf6hm73ly10e1464zta6",
+                            "PrivateIpSets": {
+                                "PrivateIpSet": [
+                                    {
+                                        "PrivateIpAddress": "192.168.12.139",
+                                        "Primary": "True"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "SpotPriceLimit": 0,
+                "DeviceAvailable": "True",
+                "SaleCycle": "",
+                "InstanceType": "ecs.c6.2xlarge",
+                "SpotStrategy": "NoSpot",
+                "OSNameEn": "RedHat_64",
+                "IoOptimized": "True",
+                "ZoneId": "cn-shanghai-f",
+                "ClusterId": "",
+                "EcsCapacityReservationAttr": {
+                    "CapacityReservationPreference": "",
+                    "CapacityReservationId": ""
+                },
+                "DedicatedHostAttribute": {
+                    "DedicatedHostId": "",
+                    "DedicatedHostName": "",
+                    "DedicatedHostClusterId": ""
+                },
+                "GPUAmount": 0,
+                "OperationLocks": {
+                    "LockReason": []
+                },
+                "InternetMaxBandwidthIn": -1,
+                "Recyclable": "False",
+                "RegionId": "cn-shanghai",
+                "CreditSpecification": ""
+            }
+        ]
+    },
+    "TotalCount": 1,
+    "NextToken": "",
+    "PageSize": 10,
+    "RequestId": "776B9FFF-7874-5839-9F68-AF3F2DD45686",
+    "PageNumber": 1
+}

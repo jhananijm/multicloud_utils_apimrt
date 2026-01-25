@@ -1,0 +1,81 @@
+build_logs_to_retain: 1000
+name: {{ deployment_name }}-{{ lifecycle_name }}{{ job_count }}
+plan:
+- get: landscape
+  passed: {{ previous_lifecycle_name }}
+  trigger: true
+{{ set_timer_plan }}
+- attempts: 1
+  config:
+    image_resource:
+      name: ""
+      source:
+        password: ((vault:iacboxpassword))
+        repository: iacbox.common.cdn.repositories.cloud.sap/iacbox2
+        tag: {{ tag_name }}
+        username: ((vault:iacboxusername))
+      type: docker-image
+    inputs:
+    - name: landscape
+    params:
+      CF_DIAL_TIMEOUT: "20"
+      CONCOURSE_DEPLOYMENT_NAME: concourse
+      DEPLOYMENT_NAME: {{ deployment_name }}
+      IAC_ACTION: lifecycle {{ lifecycle_name }}
+      IAC_LANDSCAPE_GIT_BRANCH: {{ branch_name }}
+      IAC_LANDSCAPE_GIT_PASSWORD: ((vault:credentials.github_password))
+      IAC_LANDSCAPE_GIT_PRIVATE_KEY: ""
+      IAC_LANDSCAPE_GIT_REPOSITORY: {{ git_repo }}
+      IAC_LANDSCAPE_GIT_REPOSITORY_HOST: ""
+      IAC_LANDSCAPE_GIT_USER_EMAIL: ((vault:credentials.github_email))
+      IAC_LANDSCAPE_GIT_USER_NAME: ((vault:credentials.github_username))
+      LANDSCAPE_MASTER_PASSWORD: {{ lscrypt_password }}
+      CONCOURSE_TEAM_NAME: {{ concourse_team_name }}
+      CONCOURSE_PIPELINE_NAME: {{ concourse_pipeline_name }}
+      CONCOURSE_NOTIFY_NAME: {{ concourse_notify_name }}
+      CONCOURSE_NOTIFICATION_WEBHOOK: ((vault:credentials.teams_webhook))
+      ARTIFACTORY_CREDS: ((vault:credentials.artifactory_creds))
+      SECRET_DATA: ((vault:credentials.secret_data))
+    platform: linux
+    run:
+      path: execute-iac-command.sh
+  on_failure:
+    attempts: 1
+    config:
+      image_resource:
+        name: ""
+        source:
+          password: ((vault:iacboxpassword))
+          repository: iacbox.common.cdn.repositories.cloud.sap/iacbox2
+          tag: {{ tag_name }}
+          username: ((vault:iacboxusername))
+        type: docker-image
+      inputs:
+      - name: landscape
+      params:
+        CF_DIAL_TIMEOUT: "20"
+        CONCOURSE_DEPLOYMENT_NAME: concourse
+        DEPLOYMENT_NAME: {{ deployment_name }}
+        IAC_ACTION: action post-action
+        IAC_LANDSCAPE_GIT_BRANCH: {{ branch_name }}
+        IAC_LANDSCAPE_GIT_PASSWORD: ((vault:credentials.github_password))
+        IAC_LANDSCAPE_GIT_PRIVATE_KEY: ""
+        IAC_LANDSCAPE_GIT_REPOSITORY: {{ git_repo }}
+        IAC_LANDSCAPE_GIT_REPOSITORY_HOST: ""
+        IAC_LANDSCAPE_GIT_USER_EMAIL: ((vault:credentials.github_email))
+        IAC_LANDSCAPE_GIT_USER_NAME: ((vault:credentials.github_username))
+        LANDSCAPE_MASTER_PASSWORD: {{ lscrypt_password }}
+        LIFECYCLE: {{ lifecycle_name }}
+        CONCOURSE_TEAM_NAME: {{ concourse_team_name }}
+        CONCOURSE_PIPELINE_NAME: {{ concourse_pipeline_name }}
+        CONCOURSE_NOTIFY_NAME: {{ concourse_notify_name }}
+        CONCOURSE_NOTIFICATION_WEBHOOK: ((vault:credentials.teams_webhook))
+        ARTIFACTORY_CREDS: ((vault:credentials.artifactory_creds))
+        SECRET_DATA: ((vault:credentials.secret_data))
+      platform: linux
+      run:
+        path: execute-iac-command.sh
+    task: post-action-on-failure
+    timeout: 120m
+  task: {{ deployment_name }}
+  timeout: {{ concourse_timeout }}

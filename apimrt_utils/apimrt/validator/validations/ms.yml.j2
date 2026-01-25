@@ -1,0 +1,71 @@
+name: Validate ms
+#run:
+#  - "{{ tasklist }}"
+
+run:
+  {% for task in tasks %}
+    - {{ task }}
+  {% endfor %}
+
+server_groups:
+  ms:
+    - host: "{{ ms_ip }}"
+      user: "{{ system_user }}"
+      private_key: "{{ private_key }}"
+      port: 22
+
+  pg:
+    - host: "{{ pg_ip }}"
+      user: "{{ system_user }}"
+      private_key: "{{ private_key }}"
+      port: 22
+
+  qpid:
+    - host: "{{ qpid_ip }}"
+      user: "{{ system_user }}"
+      private_key: "{{ private_key }}"
+      port: 22
+
+tasks:
+  - name: validate_apigee_all_status_for_ms
+    description: Validate if all apigee services are running
+    validations:
+      - remoteshell:
+          command: apigee-all status
+          stream: stderr
+          contains:
+            strings:
+              - "apigee-monit: OK"
+              - "edge-management-server: OK"
+              - "edge-sap-ui: OK"
+          groups:
+            - ms
+
+  - name: validate_custom_property_files
+    description: Validate if custom property files are present
+    validations:
+      - remoteshell:
+          command: ls -ld /opt/apigee/customer/application/*
+          contains:
+            strings:
+              - "monit.properties"
+              - "management-server.properties"
+          groups:
+            - ms
+
+  - name: validate_password
+    description: Check MS password
+    validations:
+      - apicall:
+          protocol: "https"
+          host: "{{ ms_lb_ip }}"
+          path: "v1/o"
+          port: 443
+          method: GET
+          response: 200
+          timeout: 10
+          auth:
+            user: "{{ admin_user }}"
+            password: "{{ admin_password }}"
+          headers:
+            content-type: application/json

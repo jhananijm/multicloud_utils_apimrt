@@ -1,0 +1,14 @@
+var_sources:
+- config:
+    client_token: ((vault_token))
+    lookup_templates:
+    - /{{.Team}}/concourse/concourse-configuration/{{.Secret}}
+    - /{{.Team}}/concourse/{{.Pipeline}}/{{.Secret}}
+    - /{{.Team}}/concourse/{{.Secret}}
+    - /common/{{.Secret}}
+    namespace: scp/centralconcourse
+    path_prefix: central-concourse-prod
+    server_name: vault.tools.sap
+    url: https://vault.tools.sap
+  name: vault
+  type: vault

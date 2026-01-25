@@ -1,0 +1,27 @@
+{
+    "Instance1": {
+        "Instances": {
+            "Instance": ""
+        }
+    },
+    "Instance2": {
+        "Instances": {
+            "Instance": [
+                {
+                    "ResourceGroupId": ""
+                }
+            ]
+        }
+    },
+    "Instance3": {
+        "Instances": {
+            "Instance": [
+                {
+                    "Tags": {
+                        "Tag": ""
+                    }
+                }
+            ]
+        }
+    }
+}

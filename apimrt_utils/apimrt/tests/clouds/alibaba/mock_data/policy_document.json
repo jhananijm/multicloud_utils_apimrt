@@ -1,0 +1,24 @@
+{
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": ["action1"],
+            "Resource": "resource1"
+        },
+        {
+            "Effect": "Allow",
+            "Action": ["action2"],
+            "Resource": "resource2"
+        },
+        {
+            "Effect": "Deny",
+            "Action": ["action3"],
+            "Resource": "resource3"
+        },
+        {
+            "Effect": "Allow",
+            "Action": ["action4"],
+            "Resource": "None"
+        }
+    ]
+}

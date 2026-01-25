@@ -1,0 +1,76 @@
+{
+    "TotalCount": 1,
+    "ScalingGroups": {
+        "ScalingGroup": [
+            {
+                "ResourceGroupId": "rg-acfmvvclcynhwei",
+                "ActiveScalingConfigurationId": "asc-uf6dw6usysdaaqcals1v",
+                "ServerGroups": {
+                    "ServerGroup": []
+                },
+                "DesiredCapacity": 1,
+                "ModificationTime": "2023-03-16T09: 07Z",
+                "LifecycleState": "Active",
+                "TotalInstanceCount": 1,
+                "AlbServerGroups": {
+                    "AlbServerGroup": []
+                },
+                "Weighted": "False",
+                "InitCapacity": 0,
+                "RemovalPolicies": {
+                    "RemovalPolicy": [
+                        "OldestInstance"
+                    ]
+                },
+                "PendingWaitCapacity": 0,
+                "TotalCapacity": 1,
+                "RemovingWaitCapacity": 0,
+                "IsElasticStrengthInAlarm": "False",
+                "ProtectedCapacity": 0,
+                "StandbyCapacity": 0,
+                "ScalingPolicy": "release",
+                "SuspendedProcesses": {
+                    "SuspendedProcess": []
+                },
+                "RemovingCapacity": 0,
+                "VSwitchIds": {
+                    "VSwitchId": [
+                        "vsw-uf6o1gwf2jn9um7bt4a6g",
+                        "vsw-uf6tezo79bvhx9cjn6dth",
+                        "vsw-uf6ly3qi0ij5kvubu6sw9"
+                    ]
+                },
+                "ScalingGroupId": "asg-uf6h4xevumiy10rtt7da",
+                "PendingCapacity": 0,
+                "VSwitchId": "vsw-uf6o1gwf2jn9um7bt4a6g",
+                "LoadBalancerIds": {
+                    "LoadBalancerId": []
+                },
+                "GroupDeletionProtection": "False",
+                "LoadBalancerConfigs": {
+                    "LoadBalancerConfig": []
+                },
+                "MaxSize": 1,
+                "ScalingGroupName": "cpabs-10516-ess-custom-mp",
+                "MinSize": 1,
+                "ActiveCapacity": 1,
+                "DefaultCooldown": 20,
+                "VpcId": "vpc-uf6hkavcc9d1mhpl1tcgs",
+                "GroupType": "ECS",
+                "SystemSuspended": "False",
+                "MonitorGroupId": 234977532,
+                "CreationTime": "2023-03-16T08: 51Z",
+                "MultiAZPolicy": "PRIORITY",
+                "StoppedCapacity": 0,
+                "RegionId": "cn-shanghai",
+                "DBInstanceIds": {
+                    "DBInstanceId": []
+                },
+                "HealthCheckType": "ECS"
+            }
+        ]
+    },
+    "RequestId": "04946AD7-C151-5A2E-A721-4D546A6049ED",
+    "PageSize": 10,
+    "PageNumber": 1
+}

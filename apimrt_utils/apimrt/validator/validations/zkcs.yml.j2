@@ -1,0 +1,112 @@
+name: Validate ZKCS
+#run:
+#  - "{{ tasklist }}"
+
+run:
+  {% for task in tasks %}
+    - {{ task }}
+  {% endfor %}
+
+server_groups:
+  ms:
+    - host: "{{ ms_ip }}"
+      user: "{{ system_user }}"
+      private_key: "{{ private_key }}"
+      port: 22
+
+  pg:
+    - host: "{{ pg_ip }}"
+      user: "{{ system_user }}"
+      private_key: "{{ private_key }}"
+      port: 22
+
+  qpid:
+    - host: "{{ qpid_ip }}"
+      user: "{{ system_user }}"
+      private_key: "{{ private_key }}"
+      port: 22
+
+  ldap:
+    - host: "{{ ldap_ip }}"
+      user: "{{ system_user }}"
+      private_key: "{{ private_key }}"
+      port: 22
+
+  zkcs:
+    - host: "{{ zkcs_ip }}"
+      user: "{{ system_user }}"
+      private_key: "{{ private_key }}"
+      port: 22
+
+tasks:
+  - name: heap_mem_check
+    description: Check Heap memory and percentage used
+    validations:
+      - remoteshell:
+          command: |
+            used=$(/opt/apigee/apigee-cassandra/bin/nodetool info | grep -m1 "Heap Memory" | awk '{print $5}')
+            total=$(/opt/apigee/apigee-cassandra/bin/nodetool info | grep -m1 "Heap Memory" | awk '{print $7}')
+            percent_used=$(printf "%.2f" $(echo "scale=5; (($used / $total) * 100)" | bc))
+            if [ $percent_used -ge 80 ]; then
+              echo "Heap memory in usage: $used MB"
+              echo "Total Heap memory available: $total MB"
+              echo "Heap memory usage is HIGH: $per%"
+            else
+              echo "Heap memory in usage: $used MB"
+              echo "Total Heap memory available: $total MB"
+              echo "Heap memory usage: $per%"
+            fi
+          not_contains:
+            strings:
+              - "HIGH"
+          groups:
+            - zkcs
+
+  - name: cassandra_ring_check
+    description: Check nodes in Cassandra Ring (UN status)
+    validations:
+      - remoteshell:
+          command: |
+            nodes=$(/opt/apigee/apigee-cassandra/bin/nodetool status | grep "UN" | wc -l)
+            modulo=$(expr $t1 % 3)
+            if [ $modulo -ne 0 ]; then
+              down_node=$(/opt/apigee/apigee-cassandra/bin/nodetool status | grep "DN")
+              echo "ERROR: One or more cassandra node(s) are down"
+              echo $down_node
+            else
+              echo "Number of nodes UN: $nodes"
+            fi
+          not_contains:
+            strings:
+              - "WRONG"
+          groups:
+            - zkcs
+
+  - name: cassandra_status_check
+    description: Check cassandra ring status
+    validations:
+      - remoteshell:
+          command: |
+            ring=$(/opt/apigee/apigee-cassandra/bin/nodetool ring)
+            up=$(echo $ring | grep "Up" | wc -l)
+            modulo=$(expr $t1 % 3)
+            if [ $modulo -ne 0 ]; then
+              echo "ERROR: Not all cassandra node(s) are Up"
+              echo $ring
+              exit 1
+            fi
+            echo $ring
+          groups:
+            - zkcs
+
+  - name: nodetool_patching_status
+    description: Check nodetool patching status
+    validations:
+      - remoteshell:
+          command: |
+            md5sum /opt/apigee/apigee-cassandra/bin/nodetool | cut -f1 -d ' '
+          not_contains:
+            strings:
+              - "1e06764ed5bbe8b532ac4d916a95da25"
+          groups:
+            - zkcs

@@ -1,0 +1,12 @@
+{
+    "ospatch": "inventory-generation,pre-validation,ospatch,post-validation",
+    "validation": "inventory-generation,validation",
+    "inventory-generation": "inventory-generation",
+    "custom-pool": "pre-validation,custom-pool,post-validation",
+    "silent-config": "silent-config",
+    "rt-upgrade": "inventory-generation,pre-validation,silent-config,rt-upgrade,post-validation",
+    "cassandra-compaction": "inventory-generation,pre-validation,cassandra-compaction,post-validation",
+    "landscape-setup": "inventory-generation,landscape-setup",
+    "cassandra-repair": "inventory-generation,pre-validation,cassandra-repair,post-validation",
+    "test": "test"
+}

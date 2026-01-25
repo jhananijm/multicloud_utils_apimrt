@@ -1,0 +1,42 @@
+name: Validate LDAP
+#run:
+#  - "{{ tasklist }}"
+
+run:
+  {% for task in tasks %}
+    - {{ task }}
+  {% endfor %}
+
+server_groups:
+  ms:
+    - host: "{{ ms_ip }}"
+      user: "{{ system_user }}"
+      private_key: "{{ private_key }}"
+      port: 22
+
+  pg:
+    - host: "{{ pg_ip }}"
+      user: "{{ system_user }}"
+      private_key: "{{ private_key }}"
+      port: 22
+
+  qpid:
+    - host: "{{ qpid_ip }}"
+      user: "{{ system_user }}"
+      private_key: "{{ private_key }}"
+      port: 22
+
+  ldap:
+    - host: "{{ ldap_ip }}"
+      user: "{{ system_user }}"
+      private_key: "{{ private_key }}"
+      port: 22
+
+tasks:
+  - name: validate_password
+    description: Check LDAP password
+    validations:
+      - remoteshell:
+          command: ldapsearch -o ldif-wrap=no -b "ou=users,ou=global,dc=apigee,dc=com" -D "cn=manager,dc=apigee,dc=com" -H ldap://:10389 -LLL -x -w {{ ldap_password }}
+          groups:
+            - ldap

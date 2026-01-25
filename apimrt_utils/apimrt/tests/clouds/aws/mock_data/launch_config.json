@@ -1,0 +1,9 @@
+{
+    "UserData": "base64_encoded_user_data",
+    "LaunchConfigurationName": "your_launch_config_name",
+    "ImageId": "your_image_id",
+    "InstanceType": "your_instance_type",
+    "SecurityGroups": ["security_group1", "security_group2"],
+    "IamInstanceProfile": "your_iam_instance_profile",
+    "BlockDeviceMappings": [{"DeviceName": "/dev/sda1", "Ebs": {"VolumeSize": 50}}]
+}

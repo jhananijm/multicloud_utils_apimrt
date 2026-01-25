@@ -1,0 +1,70 @@
+name: Validate LocalHost
+#run:
+#  - "{{ tasklist }}"
+
+run:
+  {% for task in tasks %}
+    - {{ task }}
+  {% endfor %}
+
+server_groups:
+  localhost:
+    - host: localhost
+      user: "{{ system_user }}"
+      private_key: "{{ private_key }}"
+      port: 22
+
+  ms:
+    - host: "{{ ms_ip }}"
+      user: "{{ system_user }}"
+      private_key: "{{ private_key }}"
+      port: 22
+
+  pg:
+    - host: "{{ pg_ip }}"
+      user: "{{ system_user }}"
+      private_key: "{{ private_key }}"
+      port: 22
+
+  qpid:
+    - host: "{{ qpid_ip }}"
+      user: "{{ system_user }}"
+      private_key: "{{ private_key }}"
+      port: 22
+
+  ldap:
+    - host: "{{ ldap_ip }}"
+      user: "{{ system_user }}"
+      private_key: "{{ private_key }}"
+      port: 22
+
+  zkcs:
+    - host: "{{ zkcs_ip }}"
+      user: "{{ system_user }}"
+      private_key: "{{ private_key }}"
+      port: 22
+
+tasks:
+  - name: ansible_version
+    description: Check ansible version
+    validations:
+      - remoteshell:
+          command: ansible --version | grep -m1 ansible
+          contains:
+            strings:
+              - "2.8"
+          groups:
+            - localhost
+
+  - name: check_apimrt_modules
+    description: Checks that all required apimrt modules are present
+    validations:
+      - remoteshell:
+          command: apimrt --help
+          contains:
+            strings:
+              {% for module in apimrt_modules %}
+                - {{ module }}
+              {% endfor %}
+          groups:
+            - localhost

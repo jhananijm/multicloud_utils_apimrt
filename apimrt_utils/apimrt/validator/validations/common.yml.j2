@@ -1,0 +1,217 @@
+name: Common Validations
+#run:
+#  - "{{ tasklist }}"
+
+run:
+  {% for task in tasks %}
+    - {{ task }}
+  {% endfor %}
+
+server_groups:
+  ms:
+    - host: "{{ ms_ip }}"
+      user: "{{ system_user }}"
+      private_key: "{{ private_key }}"
+      port: 22
+
+  pg:
+    - host: "{{ pg_ip }}"
+      user: "{{ system_user }}"
+      private_key: "{{ private_key }}"
+      port: 22
+
+  qpid:
+    - host: "{{ qpid_ip }}"
+      user: "{{ system_user }}"
+      private_key: "{{ private_key }}"
+      port: 22
+
+  ldap:
+    - host: "{{ ldap_ip }}"
+      user: "{{ system_user }}"
+      private_key: "{{ private_key }}"
+      port: 22
+
+  zkcs:
+    - host: "{{ zkcs_ip }}"
+      user: "{{ system_user }}"
+      private_key: "{{ private_key }}"
+      port: 22
+
+  router:
+    - host: "{{ router_ip }}"
+      user: "{{ system_user }}"
+      private_key: "{{ private_key }}"
+      port: 22
+
+  mp:
+    - host: "{{ mp_ip }}"
+      user: "{{ system_user }}"
+      private_key: "{{ private_key }}"
+      port: 22
+
+  pgm:
+    - host: "{{ pgm_ip }}"
+      user: "{{ system_user }}"
+      private_key: "{{ private_key }}"
+      port: 22
+
+  pgs:
+    - host: "{{ pgs_ip }}"
+      user: "{{ system_user }}"
+      private_key: "{{ private_key }}"
+      port: 22
+
+  sso:
+    - host: "{{ sso_ip }}"
+      user: "{{ system_user }}"
+      private_key: "{{ private_key }}"
+      port: 22
+
+tasks:
+  - name: validate_dynatrace
+    description: Validate if dynatrace is installed and running
+    validations:
+      - remoteshell:
+          command: SYSTEMD_COLORS=0 systemctl status oneagent
+          contains:
+            strings:
+              - "active (running)"
+          groups:
+            - "{{ component_type }}"
+
+  - name: validate_trendmicro
+    description: Validate if trendmicro is installed and running
+    validations:
+      - remoteshell:
+          command: systemctl status ds_agent
+          contains:
+            strings:
+              - "active (running)"
+          groups:
+            - "{{ component_type }}"
+
+  - name: validate_audit_logging
+    description: Validate if audit logging is configured
+    validations:
+      - remoteshell:
+          command: sudo crontab -l | grep sudologs
+          contains:
+            strings:
+              - "10.201.3.98"
+          groups:
+            - "{{ component_type }}"
+
+  - name: os_version_check
+    description: Check OS Version
+    validations:
+      - remoteshell:
+          command: cat /etc/os-release
+          contains:
+            strings:
+              - "7.9"
+              - "CentOS Linux 7"
+              - "8.0"
+              - "8.1"
+              - "8.2"
+              - "8.3"
+              - "8.4"
+              - "8.5"
+              - "8.6"
+              - "8.7"
+            condition: any
+          groups:
+            - "{{ component_type }}"
+
+  - name: apigee_version_check
+    description: Check Apigee Version
+    validations:
+      - remoteshell:
+          command: apigee-all version
+          groups:
+            - "{{ component_type }}"
+
+  - name: cpu_check
+    description: Check CPU utilization percentage
+    validations:
+      - remoteshell:
+          command: |
+            mpstat | awk '/all/{if(100-$NF > 80) printf("CPU usage is HIGH: %.2f%%\n"), 100-$NF; else printf("CPU usage: %.2f%%\n"), 100-$NF}'
+          groups:
+            - "{{ component_type }}"
+
+  - name: mem_check
+    description: Check Memory
+    validations:
+      - remoteshell:
+          command: |
+            free | awk '/Mem/{if($3/$2*100 > 80) printf("Memory usage is HIGH: %.2f%%\n"), $3/$2*100; else printf("Memory usage: %.2f%%\n"), $3/$2*100}'
+          not_contains:
+            strings:
+              - "HIGH"
+          groups:
+            - "{{ component_type }}"
+
+  - name: apigee_service_check
+    description: Check apigee service status
+    validations:
+      - remoteshell:
+          command: apigee-all status
+          stream: stderr
+          not_contains:
+            strings:
+              - "Not running"
+          groups:
+            - "{{ component_type }}"
+
+  - name: disk_check
+    description: Check root disk space
+    validations:
+      - remoteshell:
+          command: |
+            usage=$(df -h / | awk '/\//{print $5}' | cut -d'%' -f1)
+            if [ $usage -gt 80 ]; then
+              echo "Disk usage is HIGH: $usage%"
+            else
+              echo "Disk usage: $usage%"
+            fi
+          not_contains:
+            strings:
+              - "HIGH"
+          groups:
+            - "{{ component_type }}"
+
+  - name: cpu_load
+    description: Check CPU average load
+    validations:
+      - remoteshell:
+          command: |
+            nprocessor=$(nproc)
+            one_min=$(uptime | awk '{print $(NF-2)}' | tr -d ,)
+            one_min_per=$(printf "%.2f" $(echo "scale=5; (($one_min / $nprocessor) * 100)" | bc))
+            five_min=$(uptime | awk '{print $(NF-1)}' | tr -d ,)
+            five_min_per=$(printf "%.2f" $(echo "scale=5; (($five_min / $nprocessor) * 100)" | bc))
+            fifteen_min=$(uptime | awk '{print $NF}' | tr -d ,)
+            fifteen_min_per=$(printf "%.2f" $(echo "scale=5; (($fifteen_min / $nprocessor) * 100)" | bc))
+            echo "CPU average load 1 min: $one_min, $one_min_per%"
+            echo "CPU average load 5 min: $five_min, $five_min_per%"
+            echo "CPU average load 15 min: $fifteen_min, $fifteen_min_per%"
+          groups:
+            - "{{ component_type }}"
+
+  - name: disk_check_apigee
+    description: Check apigee disk space
+    validations:
+      - remoteshell:
+          command: |
+            usage=$(df -h /opt/apigee | awk '/\//{print $5}' | cut -d'%' -f1)
+            if [ $usage -gt 80 ]; then
+              echo "Disk usage is HIGH: $usage%"
+            else
+              echo "Disk usage: $usage%"
+            fi
+          not_contains:
+            strings:
+              - "HIGH"
+          groups:
+            - "{{ component_type }}"

@@ -1,0 +1,38 @@
+{
+    "NextToken": "",
+    "RequestId": "84C499C8-3F83-59F5-8C5D-BAB2F9E47E0C",
+    "TagResources": {
+        "TagResource": [
+            {
+                "ResourceId": "asg-uf6h4xevumiy10rtt7da",
+                "TagKey": "acs:rm:rgId",
+                "ResourceType": "ALIYUN: :ESS: :SCALINGGROUP",
+                "TagValue": "rg-acfmvvclcynhwei"
+            },
+            {
+                "ResourceId": "asg-uf6h4xevumiy10rtt7da",
+                "TagKey": "Launched",
+                "ResourceType": "ALIYUN: :ESS: :SCALINGGROUP",
+                "TagValue": "autoscaling"
+            },
+            {
+                "ResourceId": "asg-uf6h4xevumiy10rtt7da",
+                "TagKey": "SubType",
+                "ResourceType": "ALIYUN: :ESS: :SCALINGGROUP",
+                "TagValue": "MP"
+            },
+            {
+                "ResourceId": "asg-uf6h4xevumiy10rtt7da",
+                "TagKey": "pool_type",
+                "ResourceType": "ALIYUN: :ESS: :SCALINGGROUP",
+                "TagValue": "custom_pool"
+            },
+            {
+                "ResourceId": "asg-uf6h4xevumiy10rtt7da",
+                "TagKey": "Name",
+                "ResourceType": "ALIYUN: :ESS: :SCALINGGROUP",
+                "TagValue": "cpabs-10516_MP"
+            }
+        ]
+    }
+}

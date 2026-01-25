@@ -1,0 +1,2 @@
+.. autoprogram-cliff:: apimrt
+   :command: *

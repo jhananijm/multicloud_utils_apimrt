@@ -1,0 +1,15 @@
+{
+    "Status": "SCALE_IN",
+    "LifecycleHookName": "example",
+    "LifecycleHookId": "example",
+    "AutoScalingGroupName": "example",
+    "AutoScalingGroupId": "example",
+    "EC2InstanceId": "instance-1",
+    "LifecycleActionToken": "example",
+    "ComponentData": {
+        "compType": "router",
+        "component_name": "r",
+        "operation": "ScaleOut"
+    },
+    "Region": "cn-shanghai"
+}

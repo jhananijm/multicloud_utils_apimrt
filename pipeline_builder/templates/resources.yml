@@ -1,0 +1,17 @@
+resources:
+- check_every: 5m0s
+  icon: github
+  name: landscape
+  source:
+    branch: {{ branch_name }}
+    ignore_paths:
+    - state/*
+    password: {{ git_password }}
+    paths:
+    - deployments/{{ deployment_selected }}/trigger.yml
+    private_key: null
+    skip_ssl_verification: true
+    uri: {{ git_repo }}
+    username: {{ git_username }}
+  type: git
+{{ timer_resource }}

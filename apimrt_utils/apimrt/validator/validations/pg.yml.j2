@@ -1,0 +1,97 @@
+name: Validate PG
+#run:
+#  - "{{ tasklist }}"
+
+run:
+  {% for task in tasks %}
+    - {{ task }}
+  {% endfor %}
+
+server_groups:
+  ms:
+    - host: "{{ ms_ip }}"
+      user: "{{ system_user }}"
+      private_key: "{{ private_key }}"
+      port: 22
+
+  pg:
+    - host: "{{ pg_ip }}"
+      user: "{{ system_user }}"
+      private_key: "{{ private_key }}"
+      port: 22
+
+  qpid:
+    - host: "{{ qpid_ip }}"
+      user: "{{ system_user }}"
+      private_key: "{{ private_key }}"
+      port: 22
+
+tasks:
+  - name: validate_apigee_all_status_for_pg
+    description: Validate if all apigee services are running
+    validations:
+      - remoteshell:
+          command: apigee-all status
+          stream: stderr
+          contains:
+            strings:
+              - "apigee-monit: OK"
+              - "apigee-postgresql: OK"
+              - "edge-postgres-server: OK"
+          groups:
+            - pg
+
+  - name: validate_custom_property_files
+    description: Validate if custom property files are present
+    validations:
+      - remoteshell:
+          command: ls -ld /opt/apigee/customer/application/*
+          contains:
+            strings:
+              - "monit.properties"
+              - "postgres-server.properties"
+              - "postgresql.properties"
+          groups:
+            - pg
+
+  - name: validate_password
+    description: Check PG password
+    validations:
+      - remoteshell:
+          command: |
+            export PGPASSWORD={{ pg_password }};
+            psql -d apigee -U apigee -h localhost -c "SELECT version();"
+          contains:
+            strings:
+              - "version"
+          groups:
+            - pg
+
+  - name: check_max_lock_per_transaction
+    description: Check max lock per transaction
+    validations:
+      - remoteshell:
+          command: |
+            export PGPASSWORD={{ pg_password }};
+            psql -d apigee -U apigee -h localhost -c "SELECT setting FROM pg_settings WHERE name = 'max_locks_per_transaction';"
+          contains:
+            strings:
+              - "30000"
+              - "40000"
+            condition: any
+          groups:
+            - pg
+
+
+  - name: check_max_connections
+    description: Check max connections
+    validations:
+      - remoteshell:
+          command: |
+            export PGPASSWORD={{ pg_password }};
+            psql -d apigee -U apigee -h localhost -c "SHOW max_connections;"
+          contains:
+            strings:
+              - "1000"
+          groups:
+            - pg

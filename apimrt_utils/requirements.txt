@@ -1,0 +1,16 @@
+aiohttp==3.8.1
+requests
+paramiko
+artifactory
+prettytable
+pyOpenSSL==23.0.0
+cliff==3.10.1
+cloud-detect==0.0.10
+schema==0.7.5
+tzlocal==4.2
+Jinja2==3.0.3
+PyYAML==6.0
+typing_extensions
+ansible==2.8.2
+cassandra-driver
+ldap3==2.9.1

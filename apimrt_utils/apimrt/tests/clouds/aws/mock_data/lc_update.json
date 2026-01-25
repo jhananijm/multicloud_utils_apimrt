@@ -1,0 +1,8 @@
+{
+    "LaunchConfigurations": [
+        {
+            "LaunchConfigurationName": "old_launch_config",
+            "ImageId": "old_image_id"
+        }
+    ]
+}

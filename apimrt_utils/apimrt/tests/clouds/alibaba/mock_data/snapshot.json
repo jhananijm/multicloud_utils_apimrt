@@ -1,0 +1,46 @@
+[
+    {
+        "Disks": 
+        {
+            "Disk": [
+                {
+                    "DiskId": "disk_id_1"
+                }, 
+                {
+                    "DiskId": "disk_id_2"
+                }
+            ]
+        }
+    },
+    {
+        "SnapshotId": "snapshot_id_1"
+    },
+    {
+        "Snapshots": 
+        {
+            "Snapshot": [
+                {
+                    "Status": "pending"
+                }, 
+                {
+                    "Status": "accomplished"
+                }
+            ]
+        }
+    },
+    {
+        "SnapshotId": "snapshot_id_2"
+    },
+    {
+        "Snapshots": {
+            "Snapshot": [
+                {
+                    "Status": "pending"
+                }, 
+                {
+                    "Status": "accomplished"
+                }
+            ]
+        }
+    }
+]

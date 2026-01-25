@@ -1,0 +1,4 @@
+{
+    "MSUI,APP_GATEWAY_PUBLIC_IP,MSUI,ms_lb" : "state/apim-rt/deploy-vms-lb/state/state.json",
+    "ansible_lb_dns,ansible_public_ip,ansible_public_ip,ansible_lb_dns" : "state/apim-rt/deploy-vms-lb/state/state.json"
+}

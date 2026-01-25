@@ -1,0 +1,41 @@
+{
+    "AutoScalingGroups": [
+        {
+            "Tags": [
+                {
+                    "Key": "tag_key",
+                    "Value": "tag_value",
+                    "ResourceId": "ASG1"
+                }
+            ]
+        },
+        {
+            "Tags": [
+                {
+                    "Value": "tag_value",
+                    "ResourceId": "ASG2"
+                }
+            ]
+        },
+        {
+            "Tags": []
+        },
+        {
+
+        },
+        {
+            "Tags":[
+                {
+                    "Key": "other_key",
+                    "Value": "other_value",
+                    "ResourceId": "ASG2"
+                },
+                {
+                    "Key": "tag_key",
+                    "Value": "tag_value",
+                    "ResourceId": "ASG3"
+                }
+            ]
+        }
+    ]
+}    

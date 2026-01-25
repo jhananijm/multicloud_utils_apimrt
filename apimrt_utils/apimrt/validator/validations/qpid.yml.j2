@@ -1,0 +1,80 @@
+name: Validate QPID
+#run:
+#  - "{{ tasklist }}"
+
+run:
+  {% for task in tasks %}
+    - {{ task }}
+  {% endfor %}
+
+server_groups:
+  ms:
+    - host: "{{ ms_ip }}"
+      user: "{{ system_user }}"
+      private_key: "{{ private_key }}"
+      port: 22
+
+  pg:
+    - host: "{{ pg_ip }}"
+      user: "{{ system_user }}"
+      private_key: "{{ private_key }}"
+      port: 22
+
+  qpid:
+    - host: "{{ qpid_ip }}"
+      user: "{{ system_user }}"
+      private_key: "{{ private_key }}"
+      port: 22
+
+tasks:
+  - name: validate_apigee_all_status_for_qpid
+    description: Validate if all apigee services are running
+    validations:
+      - remoteshell:
+          command: apigee-all status
+          stream: stderr
+          contains:
+            strings:
+              - "apigee-monit: OK"
+              - "apigee-qpidd: OK"
+              - "edge-qpid-server: OK"
+          groups:
+            - qpid
+  
+  - name: validate_if_queue_is_present
+    description: Validate if queue is present
+    validations:
+      - remoteshell:
+          command: qpid-stat -q
+          contains:
+            strings:
+              - "axgroup"
+            #  - "consumer-group"
+          groups:
+            - qpid
+
+  - name: validate_max_queue_size
+    description: Validate if queue size is 1 GB
+    validations:
+      - remoteshell:
+          command: qpid-config queues
+          contains:
+            strings:
+              - "--max-queue-size"
+            condition: any
+          groups:
+            - qpid
+
+  - name: validate_custom_property_files
+    description: Validate if custom property files are present
+    validations:
+      - remoteshell:
+          command: ls -ld /opt/apigee/customer/application/*
+          contains:
+            strings:
+              - "monit.properties"
+              - "qpid-server.properties"
+            #  - "qpidd.properties"
+            condition: any
+          groups:
+            - qpid
