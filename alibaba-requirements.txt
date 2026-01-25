@@ -1,0 +1,7 @@
+aliyun-python-sdk-ess==2.3.7
+aliyun-python-sdk-kms==2.16.0
+aliyun-python-sdk-ecs==4.24.30
+aliyun-python-sdk-ram==3.3.0
+alibabacloud_credentials==0.2.0
+aliyun-python-sdk-ram==3.3.0
+oss2==2.16.0
