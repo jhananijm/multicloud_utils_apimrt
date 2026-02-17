@@ -8,6 +8,7 @@ The goal of this repository is to support APIMRT automation by generating invent
 
 ## High-level Flow
 
+```mermaid
 flowchart TD
     A[User or Concourse Job Trigger] --> B[Input Config and Parameters]
 
