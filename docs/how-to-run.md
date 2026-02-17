@@ -1,39 +1,43 @@
 # How to Run - concourse_utils_apimrt
 
-This document provides example usage patterns for running the utilities in this repository.
+This document explains the recommended execution flow for generating inventory and building Concourse pipelines using this repository.
 
-> Note: Exact command-line parameters may vary depending on internal implementation.
-> These examples demonstrate the recommended execution flow.
-
----
-
-## Recommended Execution Order
-
-1. Retrieve secrets
-2. Fetch inventory
-3. Normalize inventory
-4. Manage/load state
-5. Generate Concourse pipeline YAML
+> Note: Some scripts may require environment variables or access to internal services (Vault, cloud APIs, etc.).
 
 ---
 
-## 1. Setup environment
+## Prerequisites
+
+- Python 3.x installed
+- Access to required cloud accounts/subscriptions
+- Access to Vault/secret store (if applicable)
+- Required Python dependencies installed
+
+---
+
+## Setup (recommended)
+
+Create a virtual environment:
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate
 pip install -U pip
-pip install -r requirements.txt
+```
 
----
+Install dependencies:
 
-## How to Run (6-Step Execution Flow)
-
-This repository follows a simple execution flow to generate inventory and build Concourse pipelines.
-
-### Step 1: Setup Python environment
 ```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -U pip
 pip install -r requirements.txt
+```
+
+## Execution Flow (Recommended Order)
+
+The typical execution order is:
+	1.	Fetch secrets (if required)
+	2.	Fetch inventory
+	3.	Normalize inventory
+	4.	Store/load state
+	5.	Generate Concourse pipeline YAML
+
+⸻
