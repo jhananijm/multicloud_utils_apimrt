@@ -8,21 +8,20 @@ The goal of this repository is to support APIMRT automation by generating invent
 
 ## High-level Flow
 
-```mermaid
 flowchart TD
+    A[User or Concourse Job Trigger] --> B[Input Config and Parameters]
 
-    A[User / Concourse Job Trigger] --> B[Input Config / Parameters]
+    B --> S[Secrets Retrieval - utils/get_secrets.py]
+    B --> F[Inventory Fetch - utils/fetch_inventory.py]
 
-    B --> S[Secrets Retrieval<br/>utils/get_secrets.py]
-    B --> F[Inventory Fetch<br/>utils/fetch_inventory.py]
+    F --> N[Inventory Normalization - inventory_generation/inventory.py]
 
-    F --> N[Inventory Normalization<br/>inventory_generation/inventory.py]
+    N --> ST[State Management - utils/state_management.py]
 
-    N --> ST[State Management<br/>utils/state_management.py]
+    ST --> PB[Pipeline Builder - pipeline_builder/pipeline_builder.py]
 
-    ST --> PB[Pipeline Builder<br/>pipeline_builder/pipeline_builder.py]
-
-    S --> KG[Key Generation (optional)<br/>utils/key_gen.py]
+    S --> KG[Key Generation - utils/key_gen.py]
     KG --> PB
 
-    PB --> OUT[Output: Concourse Pipeline YAML]
+    PB --> OUT[Output - Concourse Pipeline YAML]
+    OUT --> C[Concourse Execution]
