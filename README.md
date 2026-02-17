@@ -35,7 +35,6 @@ concourse_utils_apimrt/
 ```
 ---
 
-```md
 ## Documentation
 - [Architecture](docs/architecture.md)
 - [Module Overview](docs/module-overview.md)
