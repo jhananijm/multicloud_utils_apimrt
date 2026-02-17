@@ -24,3 +24,16 @@ python -m venv .venv
 source .venv/bin/activate
 pip install -U pip
 pip install -r requirements.txt
+
+---
+
+## How to Run (6-Step Execution Flow)
+
+This repository follows a simple execution flow to generate inventory and build Concourse pipelines.
+
+### Step 1: Setup Python environment
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -U pip
+pip install -r requirements.txt
