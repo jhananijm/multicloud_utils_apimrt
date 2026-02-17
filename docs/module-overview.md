@@ -2,7 +2,6 @@
 
 # ✅ `docs/module-overview.md`
 
-```md
 # Module Overview - concourse_utils_apimrt
 
 This document summarizes the main modules and their role in the repository.
