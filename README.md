@@ -32,29 +32,3 @@ concourse_utils_apimrt/
     ├── get_secrets.py
     ├── key_gen.py
     └── state_management.py
-
-
-flowchart TD
-
-    A[User / Concourse Job] --> B[Input Config / Parameters]
-
-    %% Secrets
-    B --> S[get_secrets.py<br/>Fetch secrets and credentials]
-    
-    %% Inventory
-    B --> I[fetch_inventory.py<br/>Fetch raw inventory data]
-    I --> INV[inventory.py<br/>Normalize and generate inventory model]
-
-    %% State
-    INV --> ST[state_management.py<br/>Persist state and reuse previous outputs]
-
-    %% Pipeline generation
-    ST --> P[pipeline_builder.py<br/>Generate Concourse pipeline YAML]
-
-    %% Optional key generation
-    S --> K[key_gen.py<br/>Generate encryption/signing keys]
-    K --> P
-
-    %% Output
-    P --> OUT[Generated Concourse Pipeline YAML]
-    OUT --> C[Concourse CI/CD Execution]
